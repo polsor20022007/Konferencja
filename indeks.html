@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Konferencja o Zdrowiu Psychicznym</title>
+    <style>
+        /* Globalne ustawienia */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #0a1931;
+            color: white;
+            text-align: center;
+        }
+		
+		.image-strip {
+    position: fixed;
+    top: -100px; /* start poza ekranem */
+    left: 0;
+    width: 100%;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 10px 0;
+    z-index: 999;
+    transform: translateY(0);
+    animation: slideDown 1.5s ease-out forwards 1s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.image-strip img {
+    height: 60px;
+    width: auto;
+    object-fit: contain;
+}
+
+/* Animacja wyjeżdżania z góry */
+@keyframes slideDown {
+    from {
+        top: -100px;
+    }
+    to {
+        top: 0;
+    }
+}
+
+
+        /* Sekcja główna */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background: linear-gradient(to bottom, #0a1931, #162447);
+            position: relative;
+        }
+
+        h1 {
+            font-size: 3em;
+            opacity: 0;
+            transform: translateY(-20px);
+            animation: fadeIn 1.5s ease-out forwards;
+			margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 1.8em;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 1.5s ease-out forwards 0.5s;
+        }
+
+		h3 {
+            font-size: 1.8em;
+			color: #d10e00;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 1.5s ease-out forwards 1s;
+        }
+
+        /* Zegar */
+        .countdown {
+            font-size: 2.5em;
+			color: #d10e00;
+            font-weight: bold;
+            margin-top: 20px;
+            letter-spacing: 3px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 1.5s ease-out forwards 1s;
+        }
+
+        /* Strzałka przewijania */
+        .scroll-arrow {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            font-size: 3em;
+            opacity: 0.8;
+            cursor: pointer;
+            transition: opacity 0.5s ease-in-out, transform 0.3s ease-in-out;
+            animation: bounce 1.5s infinite ease-in-out;
+        }
+
+        .scroll-arrow.hidden {
+            opacity: 0;
+            transform: translateY(20px);
+            pointer-events: none;
+        }
+
+        /* Sekcja treści */
+        .content {
+            padding: 50px 10%;
+            text-align: left;
+        }
+
+        .section {
+            margin-bottom: 40px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .section img {
+            max-width: 100%;
+            width: 300px;
+            border-radius: 10px;
+            margin-right: 20px;
+        }
+
+        .text {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        /* Animacje */
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(10px); }
+        }
+
+        /* Sekcja agenda (tabela) */
+.agenda table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.agenda th, .agenda td {
+    padding: 15px;
+    text-align: left;
+    border: 1px solid #fff;
+}
+
+.agenda th {
+    background-color: #101a33;
+    font-size: 1.5em;
+}
+
+.agenda td {
+    background-color: #162447;
+    font-size: 1.2em;
+}
+
+
+        /* Nowe sekcje */
+        .section-title {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+        }
+
+        .section-text {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        /* Sekcja partnerzy */
+        .partners {
+            background-color: #162447;
+            padding: 50px 10%;
+            text-align: center;
+        }
+
+        .partners h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        .partners ul {
+            list-style-type: none;
+            padding-left: 0;
+            font-size: 1.2em;
+        }
+
+        .partners li {
+            margin-bottom: 10px;
+        }
+
+        /* Responsywność */
+        @media (max-width: 768px) {
+            .section {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .section img {
+                margin: 0 0 20px 0;
+            }
+
+            .agenda h2 {
+                font-size: 2em;
+            }
+
+            .section-title {
+                font-size: 2em;
+            }
+
+            .section-text {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="image-strip" id="imageStrip">
+        <img src="radio.jpg" alt="Obrazek 1">
+        <img src="copy.png" alt="Obrazek 2">
+        <img src="prezydent.png" alt="Obrazek 3">
+        <img src="kuratorium.png" alt="Obrazek 4">
+        <img src="instytut.png" alt="Obrazek 5">
+        <img src="mrm.png" alt="Obrazek 6">
+    </div>
+
+    <!-- Reszta strony (np. .hero, countdown itd.) -->
+
+
+    <!-- Sekcja powitalna -->
+    <div class="hero">
+        <h1>O relacjach między bliskością, a cyfrową rzeczywistością</h1>
+        <h2>Konferencja o Zdrowiu Psychicznym Młodzieżowej Rady Miasta Szczecin</h2>
+		<h2><br></h2>
+		<h3>Do wydarzenia zostało:</h3>
+        <div class="countdown" id="countdown">00:00:00:00</div>
+    </div>
+
+    <!-- Strzałka przewijania -->
+    <div class="scroll-arrow" id="scrollArrow">⬇️</div>
+
+        <!-- Sekcja Agenda -->
+<div class="content agenda">
+    <h2>Agenda</h2>
+    <table>
+        <tr>
+            <th>Godzina</th>
+            <th>Wydarzenie</th>
+        </tr>
+        <tr>
+            <td>10:00 - 10:30</td>
+            <td>Rozpoczęcie wydarzenia</td>
+        </tr>
+        <tr>
+            <td>10:30 - 11:15</td>
+            <td>Pierwszy blok wykładowy - specyfikacja relacji międzyludzkich w XXI wieku</td>
+        </tr>
+        <tr>
+            <td>11:15 - 11:30</td>
+            <td>Przerwa</td>
+        </tr>
+        <tr>
+            <td>11:30 - 12:15</td>
+            <td>Drugi blok wykładowy - zagrożenia i przeciwdziałanie zagrożeniom występującym w sieci</td>
+        </tr>
+        <tr>
+            <td>12:15 - 12:30</td>
+            <td>Przerwa</td>
+        </tr>
+		<tr>
+            <td>12:30 - 13:15</td>
+            <td>Trzeci blok wykładowy - konsekwencje prawne hejtu i stosowania mowy nienawiści</td>
+        </tr>
+		<tr>
+            <td>13:15 - 13:30</td>
+            <td>Zakończenie wydarzenia</td>
+        </tr>
+    </table>
+</div>
+
+    </div>
+
+    <!-- Sekcja "Dlaczego warto uczestniczyć?" -->
+    <div class="content">
+        <div class="section-title">Dlaczego warto uczestniczyć?</div>
+        <div class="section-text">
+            W dobie cyfrowych kontaktów i szybkiej komunikacji, coraz trudniej budować prawdziwe, zdrowe relacje. Nasza Konferencja będzie bezpieczną przestrzenią do reflaksji i inspiracji, której celem będzie:<br>
+			   <br>
+			&#x2B9E; Podniesienie świadomości na temat znaczenia zdrowych relacji we współczesnym świecie;<br>
+			&#x2B9E; Wzmacnanie uczucia empatii wśród młodzieży oraz młodych dorosłych;<br>
+			&#x2B9E; Zwalczanie hejtu w Inernecie i pormocja odpowiedzialnego obcowania z siecią.
+        </div>
+    </div>
+
+    <!-- Sekcja "Gdzie i kiedy?" -->
+    <div class="content">
+        <div class="section-title">Gdzie i kiedy?</div>
+        <div class="section-text">
+            &#x2B9E; Wydział Nauk Społecznych Uniwersytetu Szczecińskiego<br>
+			&#x2B9E; ul. Krakowska 71-79 Szczecin<br>
+			&#x2B9E; 29 maja 2025<br>
+			&#x2B9E; godziny 10:00 - 13:30<br>
+        </div>
+    </div>
+
+    <!-- Sekcja organizator -->
+    <div class="content">
+        <div class="section-title">Organizator</div>
+        <div class="section-text">
+            Młodzieżowa Rada Miasta Szczecin
+        </div>
+    </div>
+	
+	    <script src="script.js"></script>
+		
+</body>
+</html>
